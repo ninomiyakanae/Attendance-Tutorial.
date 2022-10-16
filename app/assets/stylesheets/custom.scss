@@ -48,6 +48,7 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  color: #777;
 }
 
 /* header */
@@ -67,6 +68,25 @@ p {
   color: #fff;
   text-decoration: none;
 }
+
+a:hover {
+  color:#337ab7;;
+}
+
+// * {
+//   box-sizing:boder-box;
+// }
+
+// .navbar-default .navbar-nav > li > a {
+//   font-weight:bold;
+//   color:#fff!important;
+//   line-height:20px;
+//   &:hover {
+//   text-decoration: none;
+//   background-color:royalblue;
+//   color:silver!important;
+//   }
+// }
 
 /* debug */
 
