@@ -7,9 +7,9 @@
 
 <div class="row" id="search">
   <div class="col-lg-4">
-    <%= form_with(url: users_path, local: true) do |f| %>
+    <%= form_with(url: users_path, method: :get, local: true) do |f| %>
       <%= f.label :"ユーザー名検索" %>
-      <div class="input-group"> 
+      <div class="input-group">
         <%= f.text_field :name, value: params[:search], class: "form-control", placeholder: "キーワードを入力…" %>
         <span class="input-group-btn">
           <%= f.submit :'検索',:username => nil ,class: "btn btn-primary" %>
