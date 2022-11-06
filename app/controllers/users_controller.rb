@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :set_one_month, only: :show
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where.not(id: 1).paginate(page: params[:page]).search(params[:search])
   end
 
   def show
@@ -61,11 +61,11 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :department, :password, :password_confirmation)
-    end
+  def user_params
+   params.require(:user).permit(:name, :email, :department, :password, :password_confirmation)
+  end
 
-    def basic_info_params
-      params.require(:user).permit(:department, :basic_time, :work_time)
-    end
+  def basic_info_params
+    params.require(:user).permit(:department, :basic_time, :work_time)
+  end  
 end
