@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
    def self.search(search) #self.はUser.を意味する
      if search
-      @users = User.where('name LIKE(?)', "%#{params[:name]}%") #検索とuseanameの部分一致を表示。
+      @users = User.where(['name LIKE ?', "%#{search}%"]) #検索とuseanameの部分一致を表示。
      else
        User.all #全て表示させる
      end   
