@@ -1,12 +1,25 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :set_user, only: [:index, :show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info, :edit_user]
-  before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
+  before_action :correct_user, only: [:index, :edit, :update]
+  before_action :admin_user, only: [:index, :destroy, :edit_basic_info, :update_basic_info]
   before_action :set_one_month, only: :show
+  before_action :admin_or_correct, only: [:index]
+
+  # def logged_in_user
+  # unless logged_in?
+  #   flash[:danger] = "ログインしてください。"
+  #   redirect_to login_url
+  # end
+  
+  # def correct_user
+  # @user = User.find(params[:id])
+  # redirect_to(root_url) unless @user == current_user
+  # end
 
   def index
     @users = User.where.not(id: 1).paginate(page: params[:page]).search(params[:search])
+    redirect_to(root_url) unless @user == current_user
   end
 
   def show
@@ -50,6 +63,9 @@ class UsersController < ApplicationController
   def edit_basic_info
   end
 
+  def edit_one_month
+  end
+  
   def update_basic_info
     if @user.update_attributes(basic_info_params)
       flash[:success] = "#{@user.name}の基本情報を更新しました。"
