@@ -208,5 +208,7 @@ ja:
       time: "%H：%M"
       hour: "%H"
       minute: "%M"
+      a_start_at: "%H:%M"
+      a_finish_at: "%H:%M"
       
     pm: 午後

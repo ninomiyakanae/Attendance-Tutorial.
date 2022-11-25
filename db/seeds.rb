@@ -10,8 +10,8 @@ User.create!(name: "Sample User",
   name  = Faker::Name.name
   email = "sample-#{n+1}@email.com"
   password = "password"
-  User.create!(name: name,
-               email: email,
-               password: password,
-               password_confirmation: password)
+  # User.create!(name: name,
+  #             email: email,
+  #             password: password,
+  #             password_confirmation: password)
 end
