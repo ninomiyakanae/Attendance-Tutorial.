@@ -43,9 +43,9 @@
       <th rowspan="4">残業申請</th>	
       <th rowspan="4">日付</th>	
       <th rowspan="4">曜日</th>	
-      <tr>
-       <th colspan="8">【実績】</th>	
-       <th colspan="8">所定外勤務</th>	
+     <tr>
+      <th colspan="8">【実績】</th>	
+      <th colspan="8">所定外勤務</th>	
      </tr>     
       <th colspan="3">出社</th>	
       <th colspan="3">退社</th>	
@@ -58,9 +58,9 @@
       
      </tr>	
      <tr>
-       <td>時</td><td>分</td><td></td>
-       <td>時</td><td>分</td><td></td>
-       <td>時</td><td>分</td>
+      <td>時</td><td>分</td><td></td>
+      <td>時</td><td>分</td><td></td>
+      <td>時</td><td>分</td>
      </tr>
     </thead>
     <tbody>
@@ -102,12 +102,12 @@
 
       </tr>
       <tr>
-        <td colspan="2">0.00</td>
-        <td colspan="4"></td>
+        <td>0.00</td>
+        <td colspan="2"></td>
+        <td colspan="6"></td>
         <td><%= format("%.2f", @total_working_times.to_f) %></td>
-        <td></td>
-        <td></td>
-        <td rowspan="5">所属長承認</td>
+        <td colspan="5"></td>
+        <td>所属長承認　未</td>
       </tr>
     </tfoot> 
   </table>	
