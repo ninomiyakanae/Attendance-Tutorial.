@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
+      get 'edit_overwork_request'
+      patch 'edit_overwork_request_info'
       get 'edit_basic_info'
       patch 'update_basic_info'
       get 'attendances/edit_one_month'

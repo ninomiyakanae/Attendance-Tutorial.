@@ -5,18 +5,16 @@
       <td><%= link_to "⇦", user_path(date: @first_day.prev_month) , class: "btn btn-primary" %></td>
       <td><%= l(@first_day, format: :middle) %>　時間管理表</td>
       <td><%= link_to "⇨", user_path(date: @first_day.next_month) , class: "btn btn-primary" %></td>
-      <!--<td>指定勤務時間　<　%= format_basic_info(@user.work_time) %></td>-->
       <td>
       <div class="i">指定勤務開始時間　<%= l(@user.a_start_at, format: :a_start_at) %></div>
         指定勤務終了時間　<%= l(@user.a_finish_at, format: :a_finish_at) %>
-      <td>基本時間8.00</td>
+      <td>基本時間：<%= format_basic_info(@user.basic_time) %></td>
       <td>初日　<%= l(@first_day, format: :short) %></td>
     <tr>
-      <!--<td>所属：< %= @user.department.present? ? @user.department : "未所属" %></td>-->
       <td>所属　<%= @user.department.present? ? @user.department : "未所属" %></td>
       <td>氏名　<%= @user.name %></td>
       <td>コード</td>
-      <td>5555</td>
+      <td><%= @user.id %></td>
       <td>出勤日数　<%= @worked_sum %>日</td>
       <td>締め　<%= l(@last_day, format: :short) %></td>
     </tr>
@@ -107,7 +105,19 @@
         <td colspan="6"></td>
         <td><%= format("%.2f", @total_working_times.to_f) %></td>
         <td colspan="5"></td>
-        <td>所属長承認　未</td>
+        <td><div class="aa">所属長承認　未</div> 
+        <!--< %= link_to "申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %></td>-->
+        <!--< %= link_to "残業申請", edit_overwork_request_user_path(@user, params: { user: day.worked_on }), remote: true, class: "btn btn-primary" %>-->
+        <div>
+        </div>
+        <div>
+          <select id="number" name="number">
+            <option value="1" selected="selected">　</option>
+            <option value="2">男</option>
+            <option value="3">女</option>
+           </select>
+         </div>
+        <%= link_to "申請", edit_overwork_request_user_path(@user), remote: true, class: "btn btn-primary"  %>
       </tr>
     </tfoot> 
   </table>	

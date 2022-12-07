@@ -86,4 +86,24 @@ class UsersController < ApplicationController
   def basic_info_params
     params.require(:user).permit(:department, :basic_time, :work_time)
   end  
+  
+  def basic_work_time
+    @a_finish_at -= @a_start_at 
+  end  
+  
+  # def edit_overwork_request
+  #     @user = User.find(params[:id])
+  #     redirect_to(root_url) unless current_user?(@user)
+  #     @first_day = first_day(params[:first_day])
+  #     @last_day = @first_day.end_of_month
+  #     (@first_day..@last_day).each do |day|
+  #       unless @user.attendances.any? {|attendance| attendance.worked_on == day}
+  #         record = @user.attendances.build(worked_on: day)
+  #         record.save
+  #       end
+  #     end
+  #     @dates = user_attendances_month_date
+  #     @worked_sum = @dates.where.not(started_at: nil).count
+  #   end
+  
 end
