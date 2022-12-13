@@ -5,6 +5,17 @@ class UsersController < ApplicationController
   before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
   before_action :set_one_month, only: [:show]
   before_action :admin_or_correct, only: [:show]
+  
+     # システム管理権限所有かどうか判定します。
+  # def admin_user
+  # if current_user.admin?
+  #   _header.html.erb(:users_path, :attendances_working_user_path, :"#", :edit_basic_info_user_path(current_user), remote:true)
+  #   else
+  #     redirect_to root_url unless current_user.admin?
+  # end
+
+
+    # システム管理権限所有かどうか判定します。
 
   def logged_in_user
    unless logged_in?
@@ -79,9 +90,19 @@ class UsersController < ApplicationController
   private
 
   def user_params
-   params.require(:user).permit(:name, :email, :department, :password, :password_confirmation, :a_start_at, :a_finish_at)
+  params.require(:user).permit(:name, :email, :department, :password, :password_confirmation, :a_start_at, :a_finish_at)
 
   end
+
+    # def user_params
+    #   params.require(:user).permit(:name, :email, :password, :password_confirmation,:department, :a_start_at, :a_finish_at)
+    # end
+
+    # def user_params
+    #   params.require(:user).permit(:name, :email, :affliation, :employee_number, :uid, :basic_work_time, 
+    #     :designated_work_start_time, :designated_work_end_time, :sperior, :admin, :password)
+    # end
+
 
   def basic_info_params
     params.require(:user).permit(:department, :basic_time, :work_time)
