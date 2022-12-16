@@ -1,10 +1,5 @@
 class SessionsController < ApplicationController
 
-  # def new
-  #   log_out if logged_in?
-  #   flash[:success] = 'ログアウトしました。'
-  #   redirect_to root_url    
-  # end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
