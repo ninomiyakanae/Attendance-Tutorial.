@@ -6,15 +6,6 @@ class UsersController < ApplicationController
   before_action :set_one_month, only: [:show]
   before_action :admin_or_correct, only: [:show]
   
-     # システム管理権限所有かどうか判定します。
-  # def admin_user
-  # if current_user.admin?
-  #   _header.html.erb(:users_path, :attendances_working_user_path, :"#", :edit_basic_info_user_path(current_user), remote:true)
-  #   else
-  #     redirect_to root_url unless current_user.admin?
-  # end
-
-
     # システム管理権限所有かどうか判定します。
 
   def logged_in_user
@@ -29,11 +20,12 @@ class UsersController < ApplicationController
   redirect_to(root_url) unless @user == current_user
   end
 
+
   def index
     @users = User.where.not(id: 1).paginate(page: params[:page]).search(params[:search])
     # redirect_to(root_url) unless @user == current_user
   end
-
+  
   def show
     @worked_sum = @attendances.where.not(started_at: nil).count
   end
@@ -94,16 +86,6 @@ class UsersController < ApplicationController
 
   end
 
-    # def user_params
-    #   params.require(:user).permit(:name, :email, :password, :password_confirmation,:department, :a_start_at, :a_finish_at)
-    # end
-
-    # def user_params
-    #   params.require(:user).permit(:name, :email, :affliation, :employee_number, :uid, :basic_work_time, 
-    #     :designated_work_start_time, :designated_work_end_time, :sperior, :admin, :password)
-    # end
-
-
   def basic_info_params
     params.require(:user).permit(:department, :basic_time, :work_time)
   end  
@@ -111,20 +93,4 @@ class UsersController < ApplicationController
   def basic_work_time
     @a_finish_at -= @a_start_at 
   end  
-  
-  # def edit_overwork_request
-  #     @user = User.find(params[:id])
-  #     redirect_to(root_url) unless current_user?(@user)
-  #     @first_day = first_day(params[:first_day])
-  #     @last_day = @first_day.end_of_month
-  #     (@first_day..@last_day).each do |day|
-  #       unless @user.attendances.any? {|attendance| attendance.worked_on == day}
-  #         record = @user.attendances.build(worked_on: day)
-  #         record.save
-  #       end
-  #     end
-  #     @dates = user_attendances_month_date
-  #     @worked_sum = @dates.where.not(started_at: nil).count
-  #   end
-  
 end
