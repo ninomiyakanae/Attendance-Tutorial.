@@ -7,31 +7,42 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <h1 class="modal-title">基本情報編集</h1>
     </div>
     <div class="modal-body">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <%= form_with(model: @user, url: update_basic_info_user_path(@user), local: true, method: :patch) do |f| %>
             <%= render 'shared/error_messages', object: @user %>
-
-            <%= f.label :name, class: "label-#{yield(:class_text)}" %>
-            <p><%= @user.name %></p>
-
-            <%= f.label :department, class: "label-#{yield(:class_text)}" %>
-            <%= f.text_field :department, class: "form-control" %>
-
-            <%= f.label :basic_time, class: "label-#{yield(:class_text)}" %>
-            <%= f.time_field :basic_time, class: "form-control" %>
-
-            <%= f.label :work_time, class: "label-#{yield(:class_text)}" %>
-            <%= f.time_field :work_time, class: "form-control" %>
-
-            <div class="center">
-              <%= f.submit yield(:button_text), class: "btn btn-primary btn-#{yield(:class_text)}" %>
-              <button type="button" class="btn btn-default btn-<%= yield(:class_text) %>" data-dismiss="modal">
-                キャンセル
-              </button>
+      
+          <%= f.label :"名前", class: "label-user--edit" %>
+          <%= f.text_field :name, class: "form-control" %>
+      
+          <%= f.label :"メールアドレス", class: "label-user--edit" %>
+          <%= f.email_field :email, class: "form-control" %>
+      
+          <%= f.label :"所属", class: "label-user--edit" %>
+          <%= f.text_field :department, class: "form-control" %>
+      
+          <%= f.label :"社員番号", class: "label-user--edit" %>
+          <%= f.number_field :employee_number, class: "form-control", min: 001, max: 020 %>
+      
+          <%= f.label :"カードID", class: "label-user--edit" %>
+          <%= f.number_field :uid, class: "form-control", min: 001, max: 020 %>
+      
+          <%= f.label :"パスワード", class: "label-user--edit" %>
+          <%= f.password_field :password, class: "form-control" %>
+      
+          <%= f.label :"基本勤務時間", class: "label-user--edit" %>
+          <%= f.time_field :basic_time, class: "form-control" %>
+      
+          <%= f.label :"指定勤務開始時間", class: "label-user--edit" %>
+          <%= f.time_field :designated_work_start_time, class: "form-control" %>
+      
+          <%= f.label :"指定勤務終了時間", class: "label-user--edit" %>
+          <%= f.time_field :designated_work_end_time, class: "form-control" %>
+          
+          <%= f.submit "編集する", class: "btn btn-primary btn-block btn-user--edit" %>
+          
             </div>
           <% end %>
         </div>
@@ -39,3 +50,95 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+<!--< % provide(:title, 'Edit') %>-->
+
+<!--< % @users.each do |user| %>-->
+<!--  < %= form_with(model: user, local: true) do |f| %>-->
+  
+<!--    < %= f.label :"名前", class: "label-user--edit" %>-->
+<!--    < %= f.text_field :name, class: "form-control" %>-->
+
+<!--    < %= f.label :"メールアドレス", class: "label-user--edit" %>-->
+<!--    < %= f.email_field :email, class: "form-control" %>-->
+
+<!--    < %= f.label :"所属", class: "label-user--edit" %>-->
+<!--    < %= f.text_field :department, class: "form-control" %>-->
+
+<!--    < %= f.label :"社員番号", class: "label-user--edit" %>-->
+<!--    < %= f.number_field :employee_number, class: "form-control", min: 001, max: 020 %>-->
+
+<!--    < %= f.label :"カードID", class: "label-user--edit" %>-->
+<!--    < %= f.number_field :uid, class: "form-control", min: 001, max: 020 %>-->
+
+<!--    < %= f.label :"パスワード", class: "label-user--edit" %>-->
+<!--    < %= f.password_field :password, class: "form-control" %>-->
+
+<!--    < %= f.label :"基本勤務時間", class: "label-user--edit" %>-->
+<!--    < %= f.time_field :basic_time, class: "form-control" %>-->
+
+<!--    < %= f.label :"指定勤務開始時間", class: "label-user--edit" %>-->
+<!--    < %= f.time_field :designated_work_start_time, class: "form-control" %>-->
+
+<!--    < %= f.label :"指定勤務終了時間", class: "label-user--edit" %>-->
+<!--    < %= f.time_field :designated_work_end_time, class: "form-control" %>-->
+
+<!--    < %= f.submit "編集する", class: "btn btn-primary btn-block btn-user--edit" %>-->
+<!--  < % end %>-->
+<!--< % end %>-->
+<!--</table>-->
+<!--</div>-->
+
+
+
+
+
+
+
+<!--< % provide(:class_text, 'basic-info') %>-->
+<!--< % provide(:button_text, '更新') %>-->
+
+<!--<div class="modal-dialog modal-lg modal-dialog-center">-->
+<!--  <div class="modal-content">-->
+<!--    <div class="modal-header">-->
+<!--      <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--        <span aria-hidden="true">×</span>-->
+<!--      </button>-->
+<!--      <h1 class="modal-title">基本情報編集</h1>-->
+<!--    </div>-->
+<!--    <div class="modal-body">-->
+<!--      <div class="row">-->
+<!--        <div class="col-md-6 col-md-offset-3">-->
+<!--          < %= form_with(model: @user, url: update_basic_info_user_path(@user), local: true, method: :patch) do |f| %>-->
+<!--            < %= render 'shared/error_messages', object: @user %>-->
+
+<!--            < %= f.label :name, class: "label-#{yield(:class_text)}" %>-->
+<!--            <p>< %= @user.name %></p>-->
+
+<!--            < %= f.label :department, class: "label-#{yield(:class_text)}" %>-->
+<!--            < %= f.text_field :department, class: "form-control" %>-->
+
+<!--            < %= f.label :basic_time, class: "label-#{yield(:class_text)}" %>-->
+<!--            < %= f.time_field :basic_time, class: "form-control" %>-->
+
+<!--            < %= f.label :work_time, class: "label-#{yield(:class_text)}" %>-->
+<!--            < %= f.time_field :work_time, class: "form-control" %>-->
+
+<!--            <div class="center">-->
+<!--              < %= f.submit yield(:button_text), class: "btn btn-primary btn-#{yield(:class_text)}" %>-->
+<!--              <button type="button" class="btn btn-default btn-< %= yield(:class_text) %>" data-dismiss="modal">-->
+<!--                キャンセル-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          < % end %>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+

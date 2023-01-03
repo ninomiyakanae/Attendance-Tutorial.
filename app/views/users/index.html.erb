@@ -9,12 +9,15 @@
   <div class="col-lg-4">
     <%= form_with(url: users_path, method: :get, local: true) do |f| %>
       <div class="input-group">
+      <div style="margin-bottom: 10px; border: 1px solid #333333;">       
         <%= f.submit :'ファイルを選択',:username => nil ,class: "btn btn-outline-dark" %>
+      </div>        
         <span class="input-group-btn">
           <%= f.text_field :search, value: params[:search], class: "form-control" %>
         <span class="input-group-btn">
-          <%= f.submit :'CSVをインポート',:username => nil ,class: "btn btn-primary" %>          
+          <%= f.submit :'CSVをインポート',:username => nil ,class: "btn btn-primary" %>              
         </span>
+      </div>
       </div>
     <% end %>
   </div>
@@ -31,14 +34,12 @@
     
     <thead>
       <tr>
-        <th><%= User.human_attribute_name :上限A %></th>
+        <th><%= User.human_attribute_name :上長A %></th>
       </tr>
     </thead>    
-
+    
     <% @users.each do |user| %>
       <tr>
-
-
         <td class="center">
           <% if current_user.admin? && !current_user?(user) %>
           <thead> 
@@ -46,56 +47,26 @@
                 data: { confirm: "削除してよろしいですか？" }, class: "btn btn-primary" %></th>
           </thead>             
           <thead>
-            <th><%= link_to "編集", edit_basic_info_user_path(user), remote: true, class: "btn btn-primary" %></th>
+            <!--<th>< %= link_to "編集", edit_basic_info_user_path(user), remote: true, class: "btn btn-primary btn-lg" %></th>-->
+          <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"　button type="button" class="btn btn-primary btn-lg" >編集</a>
+              </div>
+              <div id="collapse3" class="panel-collapse collapse in">
+                <div class="panel-body">
+                 <!--< % @users %>-->
+                 <!--< % @users.each do |user| %>-->
+                 <%= render 'edit_basic_info', id:user.id %> 
+                </div>
+              </div>
+            </div>
           </thead>  
-    
           <% end %>
-        </td>
+        </td>                                                                    
       </tr>
-    <% end %>
-  </table>
-  <%= will_paginate %>
-</div>
-
+    <% end %>    
+    
 <!--モーダルウインドウ表示-->
 <div id="edit-basic-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
-
-
-<% provide(:title, 'Edit') %>
-
-<% @users.each do |user| %>
-  <%= form_with(model: user, local: true) do |f| %>
-  
-    <%= f.label :"名前", class: "label-user--edit" %>
-    <%= f.text_field :name, class: "form-control" %>
-
-    <%= f.label :"メールアドレス", class: "label-user--edit" %>
-    <%= f.email_field :email, class: "form-control" %>
-
-    <%= f.label :"所属", class: "label-user--edit" %>
-    <%= f.text_field :department, class: "form-control" %>
-
-    <%= f.label :"社員番号", class: "label-user--edit" %>
-    <%= f.number_field :employee_number, class: "form-control", min: 001, max: 020 %>
-
-    <%= f.label :"カードID", class: "label-user--edit" %>
-    <%= f.number_field :uid, class: "form-control", min: 001, max: 020 %>
-
-    <%= f.label :"パスワード", class: "label-user--edit" %>
-    <%= f.password_field :password, class: "form-control" %>
-
-    <%= f.label :"基本勤務時間", class: "label-user--edit" %>
-    <%= f.time_field :basic_time, class: "form-control" %>
-
-    <%= f.label :"指定勤務開始時間", class: "label-user--edit" %>
-    <%= f.time_field :designated_work_start_time, class: "form-control" %>
-
-    <%= f.label :"指定勤務終了時間", class: "label-user--edit" %>
-    <%= f.time_field :designated_work_end_time, class: "form-control" %>
-
-    <%= f.submit "編集する", class: "btn btn-primary btn-block btn-user--edit" %>
-  <% end %>
-<% end %>
-</table>
-</div>
