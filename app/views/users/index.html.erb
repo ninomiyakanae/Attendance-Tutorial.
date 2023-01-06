@@ -57,7 +57,10 @@
                 <div class="panel-body">
                  <!--< % @users %>-->
                  <!--< % @users.each do |user| %>-->
-                 <%= render 'edit_basic_info', id:user.id %> 
+                 <!--< %= render 'edit_basic_info', user %> -->
+                 <!--< %= render 'edit' %>-->
+                 <!--< %= render 'edit', id: @users.id %>-->
+            <%= render 'edit_basic_info', object: @users %>
                 </div>
               </div>
             </div>

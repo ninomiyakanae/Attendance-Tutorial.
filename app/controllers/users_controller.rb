@@ -23,8 +23,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where.not(id: 1).paginate(page: params[:page]).search(params[:search])
-    @users = edit_basic_info_user_path.each do |user|
-    # redirect_to(root_url) unless @user == current_user
   end
   
   def show
@@ -94,5 +92,4 @@ class UsersController < ApplicationController
   def basic_work_time
     @a_finish_at -= @a_start_at 
   end  
-  end
 end

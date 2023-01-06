@@ -1,18 +1,12 @@
+<!--< % provide(:title, "Edit") %>-->
 <% provide(:class_text, 'basic-info') %>
 <% provide(:button_text, '更新') %>
 
-<div class="modal-dialog modal-lg modal-dialog-center">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
     <div class="modal-body">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-          <%= form_with(model: @user, url: update_basic_info_user_path(@user), local: true, method: :patch) do |f| %>
-            <%= render 'shared/error_messages', object: @user %>
+          <%= form_with(model: @users, url: update_basic_info_user_path(@users), local: true, method: :patch) do |f| %>
+
       
           <%= f.label :"名前", class: "label-user--edit" %>
           <%= f.text_field :name, class: "form-control" %>
