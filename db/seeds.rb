@@ -14,4 +14,12 @@ User.create!(name: "Sample User",
               email: email,
               password: password,
               password_confirmation: password)
+              
+  name = Faker::Name.上長A
+  email = "sample--1@email.com"
+  password = "password"
+  User.create!(name: name,
+              email: email,
+              password: password,
+              password_confirmation: password)              
 end

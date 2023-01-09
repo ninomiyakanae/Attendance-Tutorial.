@@ -22,7 +22,7 @@
     <% end %>
   </div>
 </div>
-
+    <% @users.each do |user| %>
 <div class="col-md-10 col-md-offset-1">
   <%= will_paginate %>
   <table class="table table-condensed table-hover" id="table-users">
@@ -34,11 +34,11 @@
     
     <thead>
       <tr>
-        <th><%= User.human_attribute_name :上長A %></th>
+        <th><%= link_to user.name, user %></th>
       </tr>
     </thead>    
     
-    <% @users.each do |user| %>
+
       <tr>
         <td class="center">
           <% if current_user.admin? && !current_user?(user) %>
@@ -47,7 +47,6 @@
                 data: { confirm: "削除してよろしいですか？" }, class: "btn btn-primary" %></th>
           </thead>             
           <thead>
-            <!--<th>< %= link_to "編集", edit_basic_info_user_path(user), remote: true, class: "btn btn-primary btn-lg" %></th>-->
           <div class="panel-group" id="accordion">
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -55,11 +54,6 @@
               </div>
               <div id="collapse3" class="panel-collapse collapse in">
                 <div class="panel-body">
-                 <!--< % @users %>-->
-                 <!--< % @users.each do |user| %>-->
-                 <!--< %= render 'edit_basic_info', user %> -->
-                 <!--< %= render 'edit' %>-->
-                 <!--< %= render 'edit', id: @users.id %>-->
             <%= render 'edit_basic_info', object: @users %>
                 </div>
               </div>
