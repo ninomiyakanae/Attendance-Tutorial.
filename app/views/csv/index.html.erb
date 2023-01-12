@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>CSVを出力する</title>
+  </head>
+  <body>
+   <table border="1" width="300" cellspacing="0" cellpadding="5" bordercolor="#333333">
+    <tr>
+    <th bgcolor="#EE0000"><font color="#FFFFFF">名前</font></th>
+    <th bgcolor="#EE0000" width="100"><font color="#FFFFFF">クラス</font></font></th>
+    <th bgcolor="#EE0000" width="100"><font color="#FFFFFF">スコア</font></th>
+    </tr>
+
+    <%for i in 0...@namesize%>
+    <tr>
+    <td bgcolor="#99CC00" align="right" nowrap><%=@name[i]%></td>
+    <td bgcolor="#FFFFFF" valign="top" width="100"><%=@class[i]%></td>
+    <td bgcolor="#FFFFFF" valign="top" width="100"><%=@score[i]%></td>
+    </tr>
+    <%end%>
+  </table>
+  </body>
+</html>
+
+<!--SpecialThanks http://www.htmq.com/html/table.shtml-->

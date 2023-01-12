@@ -23,6 +23,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where.not(id: 1).paginate(page: params[:page]).search(params[:search])
+    # @items = Item.all
+    # respond_to do |format|
+    #   format.html
+    #   format.csv { send_data Item.to_csv, type: 'text/csv; charset=shift_jis', filename: "items.csv" }
+    # end    
   end
   
   def show
@@ -82,7 +87,6 @@ class UsersController < ApplicationController
 
   def user_params
   params.require(:user).permit(:name, :email, :department, :password, :password_confirmation, :a_start_at, :a_finish_at)
-
   end
 
   def basic_info_params
@@ -92,4 +96,84 @@ class UsersController < ApplicationController
   def basic_work_time
     @a_finish_at -= @a_start_at 
   end  
+  
+   
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      user = find_by(id: row["id"]) || new
+      user.attributes = row.to_hash.slice(*updatable_attributes)
+      user.save
+    end
+  end      
+    
+  def self.updatable_attribute
+    ["name", "email", "affiliation", "employee_number", "uid",
+    "basic_work_time", "designated_work_start_time", "designated_work_end_time",
+    "superior", "admin", "password"]
+  end   
+  
+  
+ 
+  def user
+
+   respond_to do |format|
+     format.html
+     format.csv do |csv|
+
+       users = User.all    
+
+　　　　if params[:started_at][:date].present? && params[:ended_at][:date].present?
+         fromdate = params[:ended_at][:date].to_date
+         users = users.where(created_at: (params[:started_at])..fromdate.end_of_day)
+      end
+
+       csv_data = CSV.generate do |csv|
+         header = %w(id name email age)
+         csv << header           
+
+         users.each do |user|
+           values = [name, email, affiliation, employee_number, uid,
+    basic_work_time, designated_work_start_time, designated_work_end_time,
+    superior, admin, password]
+           csv << values        
+         end
+       end
+       send_data(csv_data, filename: "users.csv")
+   end    
+  end
+  
+  # def data
+  #   require 'csv'
+  #   @path = params[:csv].path
+  #   csv = CSV.table("#{@path}", encoding: "Shift_JIS:UTF-8")
+  #   @name = csv[:name]
+  #   @class = csv[:class]
+  #   @score = csv[:score]
+  # end  
+  
+  def data
+    require 'csv'
+    
+    @path = params[:csv].path
+    csv = CSV.table("#{@path}", encoding: "Shift_JIS:UTF-8")
+    @name = csv[:name]
+    @class = csv[:class]
+    @score = csv[:score]
+    
+    @namesize = @name.size.to_i
+    
+    add1,num1,add2,num2 = 0,0,0,0
+    
+    for i in 0...@namesize do
+      if @class[i] == 1
+        add1 += @score[i].to_i
+        num1 += 1
+      elsif @class[i] == 2
+        add2 += @score[i].to_i
+        num2 += 1
+      end
+    end 
+    @avg1 = add1 / num1
+    @avg2 = add2 / num2
+  end
 end

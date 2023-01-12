@@ -10,11 +10,14 @@
     <%= form_with(url: users_path, method: :get, local: true) do |f| %>
       <div class="input-group">
       <div style="margin-bottom: 10px; border: 1px solid #333333;">       
-        <%= f.submit :'ファイルを選択',:username => nil ,class: "btn btn-outline-dark" %>
+        <!--< %= f.submit :'ファイルを選択',:username => nil ,class: "btn btn-outline-dark" %>-->
+        <!--< %= f.submit :'ファイルを選択', id: 'csv_button', data: { disable_with: '処理中...'},class: "btn btn-outline-dark" %>-->
+        <%= submit_tag 'ファイルを選択', class: 'btn btn-primary', id: 'csv_button', data: { disable_with: '処理中...'} %>
       </div>        
         <span class="input-group-btn">
           <%= f.text_field :search, value: params[:search], class: "form-control" %>
         <span class="input-group-btn">
+          <!--< %= f.submit :'CSVをインポート',:username => nil ,class: "btn btn-primary" %>             -->
           <%= f.submit :'CSVをインポート',:username => nil ,class: "btn btn-primary" %>              
         </span>
       </div>
@@ -22,30 +25,17 @@
     <% end %>
   </div>
 </div>
-    <% @users.each do |user| %>
+
 <div class="col-md-10 col-md-offset-1">
   <%= will_paginate %>
   <table class="table table-condensed table-hover" id="table-users">
-    <thead>
-      <tr>
-        <th><%= User.human_attribute_name :Example %></th>
-      </tr>
-    </thead>
-    
-    <thead>
-      <tr>
-        <th><%= link_to user.name, user %></th>
-      </tr>
-    </thead>    
-    
-
-      <tr>
-        <td class="center">
-          <% if current_user.admin? && !current_user?(user) %>
-          <thead> 
-            <th><%= link_to "削除", user, method: :delete,
-                data: { confirm: "削除してよろしいですか？" }, class: "btn btn-primary" %></th>
-          </thead>             
+    <% @users.each do |user| %>
+ 
+    <%= link_to user.name, user %>
+    <div class="bb">
+    | <%= link_to "削除", user, method: :delete,
+                    data: { confirm: "削除してよろしいですか？" }, class: "btn btn-primary" %>
+    </div>                
           <thead>
           <div class="panel-group" id="accordion">
             <div class="panel panel-default">
@@ -59,9 +49,6 @@
               </div>
             </div>
           </thead>  
-          <% end %>
-        </td>                                                                    
-      </tr>
     <% end %>    
     
 <!--モーダルウインドウ表示-->

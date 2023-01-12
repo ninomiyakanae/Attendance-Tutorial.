@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'csv/index'
+
   root 'static_pages#top'
   get '/signup', to: 'users#new'
   patch  '/login', to: 'users#edit'
